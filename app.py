@@ -65,7 +65,7 @@ def create_conversational_chain(vector_store):
                         #model_type="llama", config={'max_new_tokens': 500, 'temperature': 0.01})
     from langchain.llms import HuggingFaceTextGenInference
 
-    inference_server_url = 'https://e7tg6hm8s83hux-80.proxy.runpod.net'
+    inference_server_url = 'https://cnu9e1to176skp-80.proxy.runpod.net'
     llm = HuggingFaceTextGenInference(
         inference_server_url=inference_server_url,
         max_new_tokens=512,

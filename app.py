@@ -75,12 +75,11 @@ def create_conversational_chain(vector_store):
         temperature=0.5,
         repetition_penalty=1.03,streaming=True
     )
-    prompt="Please analyze the contract provided and identify any clauses or language related to contingent liabilities. If contingent liabilities are present, provide a summary of the relevant sections. After that, check if the situation provided by the user, for example, 'Party B violated to pay $500 for this month,' is relevant or constitutes a contingent liability according to the clauses in the contract. If it is relevant, suggest any actions or remedies that should be taken. If the situation is not relevant to the contingent liability clauses, please confirm that it does not fall under contingent liabilities and explain why."
     memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
 
     chain = ConversationalRetrievalChain.from_llm(llm=llm, chain_type='stuff',
                                                  retriever=vector_store.as_retriever(search_kwargs={"k": 2}),
-                                                 memory=memory,combine_docs_chain_kwargs={"prompt": prompt})
+                                                 memory=memory)
     return chain
 
 def main():

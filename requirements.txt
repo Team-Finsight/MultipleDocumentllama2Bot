@@ -1,3 +1,4 @@
+openai==0.28.1
 langchain
 torch
 accelerate
@@ -13,4 +14,3 @@ python-dotenv
 replicate
 docx2txt
 text_generation
-openai>=0.27.0

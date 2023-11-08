@@ -14,6 +14,7 @@ from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 import os
 from dotenv import load_dotenv
 import tempfile
+from langchain.chat_models import ChatAnyscale
 
 
 load_dotenv()
@@ -63,18 +64,9 @@ def create_conversational_chain(vector_store):
                         #streaming=True, 
                         #callbacks=[StreamingStdOutCallbackHandler()],
                         #model_type="llama", config={'max_new_tokens': 500, 'temperature': 0.01})
-    from langchain.llms import HuggingFaceTextGenInference
-
-    inference_server_url = "https://api.endpoints.anyscale.com/v1"
-    llm = HuggingFaceTextGenInference(
-        inference_server_url=inference_server_url,
-        max_new_tokens=512,
-        top_k=10,
-        top_p=0.95,
-        typical_p=0.95,
-        temperature=0.5,
-        repetition_penalty=1.03,streaming=True
-    )
+    ANYSCALE_ENDPOINT_TOKEN = "esecret_fv9yhc2f1ix7lfdztdfh1fd6n8"
+    llm = ChatAnyscale(anyscale_api_key=ANYSCALE_ENDPOINT_TOKEN,
+                  temperature=0.7, model_name="meta-llama/Llama-2-13b-chat-hf", streaming=True)
     memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
 
     chain = ConversationalRetrievalChain.from_llm(llm=llm, chain_type='stuff',

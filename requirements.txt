@@ -13,4 +13,4 @@ python-dotenv
 replicate
 docx2txt
 text_generation
-openai==1.1.1
+openai>=0.27.0
